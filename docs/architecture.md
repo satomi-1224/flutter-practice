@@ -13,6 +13,7 @@
 * **Data Class:** Freezed + JsonSerializable
 * **UI Design:** Atomic Design
 * **Testing:** flutter_test (Unit/Widget), Maestro (E2E / 別リポジトリ運用)
+* **Configuration:** flutter_dotenv
 
 ---
 
@@ -23,13 +24,18 @@
 ```text
 lib/
 ├── config/              # 環境変数 (Env), 定数
+│   └── env.dart         # 環境変数アクセサ
 │
 ├── pages/               # 【画面カタログ】 (Routing Endpoints)
-│   ├── home/
 │   ├── auth/
-│   │   └── login_page.dart
-│   └── products/
-│       └── product_list_page.dart
+│   │   └── login/
+│   │       └── login_page.dart  # /auth/login
+│   ├── product/
+│   │   ├── product_page.dart    # /products
+│   │   └── detail/
+│   │       └── product_detail_page.dart # /products/:id
+│   └── cart/
+│       └── cart_page.dart       # /cart
 │
 ├── features/            # 【機能モジュール】 (Vertical Slices)
 │   ├── auth/
@@ -49,7 +55,6 @@ lib/
 │
 ├── infra/               # 【全域基盤】 (Infrastructures)
 │   ├── api/             # Dio設定, Interceptors
-│   ├── generated/       # ★OpenAPI等の自動生成コード (Lint除外)
 │   └── exceptions/      # 共通例外定義
 │
 ├── routes/              # 【ルーティング】 Route定義 (GoRouter)
@@ -67,12 +72,11 @@ lib/
 ### 3.1. Pages (`lib/pages/`)
 
 * **役割:** ルーティングの終端（URLと対になるファイル）。
-* **責務:**
-* `widgets/layouts` (共通枠) の呼び出し。
-* `features/.../containers` (機能コンテナ) の配置。
-* **禁止事項:** 複雑なロジック記述、直接のAPIコール。
-
-
+* **命名・構造ルール:**
+    *   **1パス = 1ディレクトリ**: URLのパスセグメントごとにディレクトリを切る。
+    *   **1ディレクトリ = 1ファイル**: 各ディレクトリにはメインとなるPageファイルを1つ配置する。
+    *   **単数形**: ディレクトリ名・ファイル名は原則として単数形を使用する（例: `products/list` ではなく `product/product_page.dart`）。
+    *   **ネスト**: 下層ページはサブディレクトリとしてネストする（例: `/products/:id` → `product/detail/product_detail_page.dart`）。
 
 ### 3.2. Features (`lib/features/`)
 
@@ -80,34 +84,24 @@ lib/
 
 | ディレクトリ | 役割 | 詳細 |
 | --- | --- | --- |
-| **`infra`** | Data Layer | APIクライアント(Retrofit)とRepositoryの実装。 |
+| **`infra`** | Data Layer | APIクライアント(Retrofit)とRepositoryの実装。Mock/Realの切り替えもここで行う。 |
 | **`models`** | Data Model | BFFからのレスポンス定義。EntityとDTOを兼ねる。 |
 | **`controllers`** | Logic | `Notifier` / `AsyncNotifier` による状態管理とビジネスロジック。 |
 | **`containers`** | **Smart UI** | Controller(`ref`)とWidgetを繋ぐ結合層。データを取得し、Viewに渡す。 |
 | **`widgets`** | **Dumb UI** | ロジックを持たない純粋な表示部品。Atomic Designで構成。 |
 
-### 3.3. Widgets (`lib/widgets/`)
+### 3.3. Config (`lib/config/`)
 
-特定のFeatureに依存しない、アプリ全体で再利用可能なUIコンポーネント。Atomic Designに準拠する。
+環境ごとの設定値を管理する。
 
-### 3.4. Infra (`lib/infra/`)
-
-アプリ全体を支える技術基盤。
-
-* **`generated`**: OpenAPI等から自動生成されたコードを配置。`analysis_options.yaml` でLint対象外に設定する。
-
-### 3.5. Routes (`lib/routes/`)
-
-画面遷移の定義。
-
-* **`app_router.dart`**: GoRouterの設定本体。
-* **`app_routes.dart`**: パスやルート名の定数定義、またはTyped Routes定義。
+*   **`.env`**: APIキーやベースURLなどを定義（Git管理対象外）。
+*   **`env.dart`**: `flutter_dotenv` をラップし、型安全に環境変数へアクセスするためのクラス。コード内では直接 `dotenv` を呼ばず、必ずこのクラスを経由する。
 
 ---
 
-## 4. データフロー (Data Flow)
+## 4. データフロー & Mock戦略
 
-**MVVM** パターンに基づき、データとイベントは以下のフローで処理されます。
+### 4.1. データフロー (MVVM)
 
 ```mermaid
 graph TD
@@ -139,9 +133,23 @@ graph TD
 
 ```
 
-1. **Container** が `ref.watch` で **Controller** の状態を監視する。
-2. 状態が変化したら、データを **View (Widgets)** に渡して描画する。
-3. ユーザー操作は **View** からCallback経由で **Container** へ伝わり、**Controller** のメソッドを実行する。
+### 4.2. Mock戦略
+
+開発効率向上のため、環境変数によって実APIとMockを切り替えられるようにする。
+
+1.  **`.env` 設定**: `USE_MOCK=true` を定義。
+2.  **Repository実装**: `Provider` 内でフラグを判定し、`MockRepository` か `RealRepository` を返す。
+
+```dart
+@Riverpod(keepAlive: true)
+AuthRepository authRepository(Ref ref) {
+  if (Env.useMock) {
+    return MockAuthRepository();
+  } else {
+    return AuthRepositoryImpl();
+  }
+}
+```
 
 ---
 
@@ -167,20 +175,11 @@ graph TD
 
 ## 6. 自動生成と除外設定
 
-### OpenAPI / Generated Code
+### Build Runner (Freezed, Riverpod, etc.)
 
-* **定義:** プロジェクトルートの `openapi/` に配置。
-* **出力:** `lib/infra/generated/` に出力。
-* **Lint:** `analysis_options.yaml` にて以下を除外設定する。
-
-```yaml
-analyzer:
-  exclude:
-    - "lib/infra/generated/**"
-    - "**/*.g.dart"
-    - "**/*.freezed.dart"
-
-```
+*   **配置**: 生成ファイル（`.g.dart`, `.freezed.dart`）は、**元のソースファイルの隣**に配置する。
+*   **理由**: `part` 宣言によるプライベートメンバへのアクセスが必要なため。
+*   **Lint除外**: `analysis_options.yaml` にて警告対象外に設定する。
 
 ### 実行コマンド
 
@@ -188,5 +187,4 @@ analyzer:
 
 ```bash
 dart run build_runner watch -d
-
 ```
