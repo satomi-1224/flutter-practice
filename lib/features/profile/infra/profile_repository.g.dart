@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'product_repository.dart';
+part of 'profile_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,49 +9,49 @@ part of 'product_repository.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(productRepository)
-final productRepositoryProvider = ProductRepositoryProvider._();
+@ProviderFor(profileRepository)
+final profileRepositoryProvider = ProfileRepositoryProvider._();
 
-final class ProductRepositoryProvider
+final class ProfileRepositoryProvider
     extends
         $FunctionalProvider<
-          ProductRepository,
-          ProductRepository,
-          ProductRepository
+          ProfileRepository,
+          ProfileRepository,
+          ProfileRepository
         >
-    with $Provider<ProductRepository> {
-  ProductRepositoryProvider._()
+    with $Provider<ProfileRepository> {
+  ProfileRepositoryProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'productRepositoryProvider',
+        name: r'profileRepositoryProvider',
         isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$productRepositoryHash();
+  String debugGetCreateSourceHash() => _$profileRepositoryHash();
 
   @$internal
   @override
-  $ProviderElement<ProductRepository> $createElement(
+  $ProviderElement<ProfileRepository> $createElement(
     $ProviderPointer pointer,
   ) => $ProviderElement(pointer);
 
   @override
-  ProductRepository create(Ref ref) {
-    return productRepository(ref);
+  ProfileRepository create(Ref ref) {
+    return profileRepository(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(ProductRepository value) {
+  Override overrideWithValue(ProfileRepository value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<ProductRepository>(value),
+      providerOverride: $SyncValueProvider<ProfileRepository>(value),
     );
   }
 }
 
-String _$productRepositoryHash() => r'20854b3aee88a8c6afbaeb9f77714520716e3145';
+String _$profileRepositoryHash() => r'fec696a42144ec9d95329dc26dcbd65b5933baef';

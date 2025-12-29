@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_app/features/products/controllers/product_list_controller.dart';
+import 'package:flutter_app/features/product/controllers/product_list_controller.dart';
 import 'package:flutter_app/utils/currency_formatter.dart';
-import 'package:flutter_app/features/products/models/product.dart';
+import 'package:flutter_app/features/product/models/product.dart';
 
 class ProductPage extends HookConsumerWidget {
   const ProductPage({super.key});

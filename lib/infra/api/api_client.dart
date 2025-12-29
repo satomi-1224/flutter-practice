@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_app/config/env.dart';
 
 part 'api_client.g.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_app/features/products/controllers/product_list_controller.dart';
+import 'package:flutter_app/features/product/controllers/product_list_controller.dart';
 import 'package:flutter_app/utils/currency_formatter.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter_app/widgets/atoms/primary_button.dart';

@@ -1,7 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_app/features/products/models/product.dart';
-import 'package:flutter_app/features/products/infra/product_repository.dart';
+import 'package:flutter_app/features/product/models/product.dart';
+import 'package:flutter_app/features/product/infra/product_repository.dart';
 
 part 'product_list_controller.g.dart';
 

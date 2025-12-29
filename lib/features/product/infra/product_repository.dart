@@ -1,7 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_app/config/env.dart';
-import 'package:flutter_app/features/products/models/product.dart';
+import 'package:flutter_app/features/product/models/product.dart';
 
 part 'product_repository.g.dart';
 

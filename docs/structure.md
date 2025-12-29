@@ -80,7 +80,7 @@ class Product with _$Product {
 
 ## 4. アーキテクチャ適用ポイント
 
-*   **Feature-First**: `lib/features/auth`, `lib/features/products` など機能ごとに分割。
+*   **Feature-First**: `lib/features/auth`, `lib/features/product` など機能ごとに分割。
 *   **MVVM**:
     *   **Model**: Freezedクラス, Repository.
     *   **ViewModel**: Riverpod Notifier / AsyncNotifier.

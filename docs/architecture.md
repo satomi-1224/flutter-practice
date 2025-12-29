@@ -82,6 +82,8 @@ lib/
 
 機能ごとの「縦割り」モジュール。原則として他機能の内部実装（Controller/Repository）に依存してはならない。
 
+*   **命名ルール**: ディレクトリ名は**単数形**で統一する（例: `products` ではなく `product`）。
+
 | ディレクトリ | 役割 | 詳細 |
 | --- | --- | --- |
 | **`infra`** | Data Layer | APIクライアント(Retrofit)とRepositoryの実装。Mock/Realの切り替えもここで行う。 |

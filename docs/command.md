@@ -48,11 +48,11 @@ New-Item -ItemType Directory -Force -Path lib/pages/home
 New-Item -ItemType Directory -Force -Path lib/pages/auth
 New-Item -ItemType Directory -Force -Path lib/pages/products
 New-Item -ItemType Directory -Force -Path lib/features/auth
-New-Item -ItemType Directory -Force -Path lib/features/products/infra
-New-Item -ItemType Directory -Force -Path lib/features/products/models
-New-Item -ItemType Directory -Force -Path lib/features/products/controllers
-New-Item -ItemType Directory -Force -Path lib/features/products/containers
-New-Item -ItemType Directory -Force -Path lib/features/products/widgets
+New-Item -ItemType Directory -Force -Path lib/features/product/infra
+New-Item -ItemType Directory -Force -Path lib/features/product/models
+New-Item -ItemType Directory -Force -Path lib/features/product/controllers
+New-Item -ItemType Directory -Force -Path lib/features/product/containers
+New-Item -ItemType Directory -Force -Path lib/features/product/widgets
 New-Item -ItemType Directory -Force -Path lib/widgets/atoms
 New-Item -ItemType Directory -Force -Path lib/widgets/molecules
 New-Item -ItemType Directory -Force -Path lib/widgets/layouts
@@ -69,7 +69,7 @@ New-Item -ItemType Directory -Force -Path lib/utils
 mkdir -p lib/config
 mkdir -p lib/pages/home lib/pages/auth lib/pages/products
 mkdir -p lib/features/auth
-mkdir -p lib/features/products/{infra,models,controllers,containers,widgets}
+mkdir -p lib/features/product/{infra,models,controllers,containers,widgets}
 mkdir -p lib/widgets/{atoms,molecules,layouts}
 mkdir -p lib/infra/{api,generated,exceptions}
 mkdir -p lib/routes
