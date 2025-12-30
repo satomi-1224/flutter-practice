@@ -14,9 +14,8 @@ abstract class ProfileRepository {
 ProfileRepository profileRepository(Ref ref) {
   if (Env.useMock) {
     return MockProfileRepository();
-  } else {
-    return ProfileRepositoryImpl(ref.read(profileApiClientProvider));
   }
+  return ProfileRepositoryImpl(ref.read(profileApiClientProvider));
 }
 
 class ProfileRepositoryImpl implements ProfileRepository {

@@ -15,9 +15,8 @@ abstract class OrderRepository {
 OrderRepository orderRepository(Ref ref) {
   if (Env.useMock) {
     return MockOrderRepository();
-  } else {
-    return OrderRepositoryImpl(ref.read(orderApiClientProvider));
   }
+  return OrderRepositoryImpl(ref.read(orderApiClientProvider));
 }
 
 class OrderRepositoryImpl implements OrderRepository {

@@ -9,10 +9,10 @@
 
 ```mermaid
 flowchart TD
-    Model[1. Model定義<br>(freezed)] --> API[2. API定義<br>(retrofit)]
-    API --> Repo[3. Repository実装<br>(Mock/Real)]
-    Repo --> Ctrl[4. Controller実装<br>(AsyncNotifier)]
-    Ctrl --> UI[5. UI実装<br>(ConsumerWidget)]
+    Model[1. Model定義] --> API[2. API定義]
+    API --> Repo[3. Repository実装]
+    Repo --> Ctrl[4. Controller実装]
+    Ctrl --> UI[5. UI実装]
 ```
 
 ---
@@ -68,11 +68,11 @@ APIクライアントをラップし、MockとRealの切り替えを行います
 ProductRepository productRepository(Ref ref) {
   if (Env.useMock) {
     return MockProductRepository();
-  } else {
-    // Real実装ではAPIクライアントを呼ぶ
-    final api = ref.read(productApiClientProvider);
-    return ProductRepositoryImpl(api);
   }
+  
+  // Real実装ではAPIクライアントを呼ぶ
+  final api = ref.read(productApiClientProvider);
+  return ProductRepositoryImpl(api);
 }
 
 class ProductRepositoryImpl implements ProductRepository {

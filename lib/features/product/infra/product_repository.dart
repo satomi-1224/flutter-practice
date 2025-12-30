@@ -13,9 +13,8 @@ abstract class ProductRepository {
 ProductRepository productRepository(Ref ref) {
   if (Env.useMock) {
     return MockProductRepository();
-  } else {
-    return ProductRepositoryImpl();
   }
+  return ProductRepositoryImpl();
 }
 
 class ProductRepositoryImpl implements ProductRepository {

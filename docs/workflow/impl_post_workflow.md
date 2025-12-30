@@ -9,10 +9,10 @@
 
 ```mermaid
 flowchart TD
-    Model[1. Request Body定義<br>(freezed)] --> API[2. API定義<br>(retrofit)]
-    API --> Repo[3. Repository実装<br>(Mock/Real)]
-    Repo --> Ctrl[4. Controllerメソッド追加<br>(Mutation)]
-    Ctrl --> UI[5. イベント発火<br>(OnPressed)]
+    Model[1. Request Body定義] --> API[2. API定義]
+    API --> Repo[3. Repository実装]
+    Repo --> Ctrl[4. Controllerメソッド追加]
+    Ctrl --> UI[5. イベント発火]
 ```
 
 ---

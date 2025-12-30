@@ -12,9 +12,8 @@ abstract class AuthRepository {
 AuthRepository authRepository(Ref ref) {
   if (Env.useMock) {
     return MockAuthRepository();
-  } else {
-    return AuthRepositoryImpl();
   }
+  return AuthRepositoryImpl();
 }
 
 class AuthRepositoryImpl implements AuthRepository {
