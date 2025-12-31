@@ -489,7 +489,7 @@ packages:
     source: hosted
     version: "17.0.1"
   go_router_builder:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: go_router_builder
       sha256: "8f1dd8cc23850dba4223104231682a9410576720cb24693fb0eb925c49b2abe3"
@@ -628,10 +628,10 @@ packages:
     dependency: transitive
     description:
       name: lean_builder
-      sha256: "4f3d70c34c52cc5034e8cc6f53d35aa3a32fb373b78fb4c29cf45cd1dcf06942"
+      sha256: "6af3cfbf34400eb14b89fe20111e5981e7083362f00ea10b9ed2a6e833250d76"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.5"
+    version: "0.1.6"
   lints:
     dependency: transitive
     description:
@@ -689,7 +689,7 @@ packages:
     source: hosted
     version: "2.0.0"
   mockito:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: mockito
       sha256: dac24d461418d363778d53198d9ac0510b9d073869f078450f195766ec48d05e
@@ -1166,7 +1166,7 @@ packages:
     source: hosted
     version: "1.4.0"
   uuid:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: uuid
       sha256: a11b666489b1954e01d992f3d601b1804a33937b5a8fe677bd26b8a9f96f96e8
@@ -1193,10 +1193,10 @@ packages:
     dependency: transitive
     description:
       name: watcher
-      sha256: f52385d4f73589977c80797e60fe51014f7f2b957b5e9a62c3f6ada439889249
+      sha256: "592ab6e2892f67760543fb712ff0177f4ec76c031f02f5b4ff8d3fc5eb9fb61a"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.1.4"
   web:
     dependency: transitive
     description:
