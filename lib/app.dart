@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_app/routes/app_router.dart';
-import 'package:flutter_app/theme/app_theme.dart';
 
-class App extends ConsumerWidget {
+class App extends StatelessWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final router = ref.watch(routerProvider);
-
-    return MaterialApp.router(
-      title: 'Flutter Shop',
-      theme: AppTheme.lightTheme,
-      routerConfig: router,
-      debugShowCheckedModeBanner: false,
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter App',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const Scaffold(
+        body: Center(
+          child: Text('New App Ready'),
+        ),
+      ),
     );
   }
 }
