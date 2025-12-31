@@ -109,3 +109,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/user.dart';
 import 'user_state.dart';
 ```
+
+---
+
+## 5. 環境変数 (Environment Variables)
+
+`.env` ファイルへのアクセスは、必ず **`lib/config/env.dart`** (Envクラス) を経由してください。
+コード内で直接 `dotenv.env['KEY']` を参照することは禁止します。これにより、キー名のタイプミスを防ぎ、型安全性やデフォルト値の管理を一元化します。
+
+```dart
+// ❌ Bad: 直接参照
+final apiKey = dotenv.env['API_KEY'];
+
+// ✅ Good: Envクラス経由
+final apiKey = Env.apiKey;
+```
