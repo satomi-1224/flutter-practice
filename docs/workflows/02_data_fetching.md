@@ -17,7 +17,7 @@ part 'product.freezed.dart';
 part 'product.g.dart';
 
 @freezed
-class Product with _$Product {
+abstract class Product with _$Product {
   // APIレスポンスのフィールド定義
   // JSONのキーはsnake_caseだが、Dart側はcamelCaseで定義する。
   // @JsonKeyなどは build_runner が自動解決する設定になっているため基本不要。
